@@ -16,17 +16,18 @@ Aplica el mismo nivel de dificultad para los 3 idiomas.
 Este programa tiene una base de datos de 884 palabras en español, 275 en inglés y 241 en alemán, para un total de 1400 palabras.
 
 ```python
-##Instrucciones del programa.
-print("¡Hola, vamos a jugar al ahorcado!")
-print("===========================================================================================================================================")
-print("Antes de iniciar, le voy a mencionar las reglas del juego.")
-print("===========================================================================================================================================")
-print("1. Este juego se puede configurar en 3 idiomas (Español, alemán o inglés).")
-print("2. Cada idioma tendrá 3 niveles de dificultad (Fácil, medio y difícil).")
-print("   En el nivel fácil usted tendrá 7 intentos para adivinar la palabra y sólo saldrán palabras de 5 letras o menos.")
-print("   En el nivel medio, usted tendrá 6 intentos para adivinar la palabra y sólo saldrán palabras de 6 o 7 letras.")
-print("   En el nivel difícil, usted tendrá 5 intentos para adivinar la palabra y sólo saldrán palabras de más de 7 letras.")
 import random ##Importante para seleccionar aleatoriamente una palabra de las listas y diccionarios dados.
+##Instrucciones del programa.
+def instrucciones(): ##Esta función sirve para indicarle las reglas al usuario.
+    print("¡Hola, vamos a jugar al ahorcado!")
+    print("===========================================================================================================================================")
+    print("Antes de iniciar, le voy a mencionar las reglas del juego.")
+    print("===========================================================================================================================================")
+    print("1. Este juego se puede configurar en 3 idiomas (Español, alemán o inglés).")
+    print("2. Cada idioma tendrá 3 niveles de dificultad (Fácil, medio y difícil).")
+    print("   En el nivel fácil usted tendrá 7 intentos para adivinar la palabra y sólo saldrán palabras de 5 letras o menos.")
+    print("   En el nivel medio, usted tendrá 6 intentos para adivinar la palabra y sólo saldrán palabras de 6 o 7 letras.")
+    print("   En el nivel difícil, usted tendrá 5 intentos para adivinar la palabra y sólo saldrán palabras de más de 7 letras.")
 
 def idioma(): ##Esta función se encarga de almacenar la lista de palabras en español, y los diccionarios de palabras en inglés y alemán.
     ##Además, esta función sirve para que el usuario escoja en qué idioma desea jugar.
@@ -711,17 +712,16 @@ def idioma(): ##Esta función se encarga de almacenar la lista de palabras en es
 
     while True: ##Ciclo while sólo por si el usuario se equivoca o no ingresa una cadena válida.
         lenguaje = input("Ingrese el idioma en el cual desea jugar (Español/Inglés/Alemán): ").lower()
-        if lenguaje == "español":
+        if lenguaje == "español" or lenguaje == "espanol":
             return palabras_español
-        elif lenguaje == "ingles":
+        elif lenguaje == "ingles" or lenguaje == "inglés":
             return palabras_ingles
-        elif lenguaje == "aleman":
+        elif lenguaje == "aleman" or lenguaje == "alemán":
             return palabras_aleman
         else:
-            print("Seleccione un idioma válido (Español, alemán o inglés).")
+                print("Seleccione un idioma válido (Español, alemán o inglés).")
 
-def dificultad(palabras):
-    ##Esta función sirve para seleccionar la dificultad dependiendo del idioma que haya escogido el usuario.
+def dificultad(palabras): ##Esta función sirve para seleccionar la dificultad dependiendo del idioma que haya escogido el usuario.
     while True: ##Ciclo while nuevamente por si el usuario se equivoca o ingresa una cadena inválida.
         nivel = input("Seleccione el nivel de dificultad, siendo 1 nivel fácil, 2 nivel medio y 3 nivel difícil: ")
         if nivel == "1":
@@ -736,8 +736,7 @@ def dificultad(palabras):
         else:
             print("Seleccione un nivel válido.")
 
-def mostrar_letras_adivinadas(palabra_secreta, letras_adivinadas):
-    ##Esta función sirve para reemplazar cada letra de la palabra que se haya escogido ya sea por guiones bajos o una letra que se haya adivinado.
+def mostrar_letras_adivinadas(palabra_secreta, letras_adivinadas): ##Esta función sirve para reemplazar cada letra de la palabra que se haya escogido ya sea por guiones bajos o una letra que se haya adivinado.
     for letra in palabra_secreta:
         if letra in letras_adivinadas:
             print(letra, end=" ")
@@ -745,8 +744,7 @@ def mostrar_letras_adivinadas(palabra_secreta, letras_adivinadas):
             print("_", end=" ")
     print()
 
-def obtener_intento(letras_probadas, palabra_secreta):
-    ##Esta función sirve para obtener y retornar la letra que haya ingresado el usuario.
+def obtener_intento(letras_probadas, palabra_secreta): ##Esta función sirve para obtener y retornar la letra que haya ingresado el usuario.
     while True:
         intento = input("Ingrese una letra: ").lower()
         
@@ -754,7 +752,7 @@ def obtener_intento(letras_probadas, palabra_secreta):
             if intento == palabra_secreta:
                 return intento
             else:
-                print("Esa no es la palabra correcta.")
+                print("Ingrese una sola letra.")
         elif len(intento) == 1 and intento in letras_probadas:
             print("Ya adivinó esa letra, intente nuevamente.")
         elif len(intento) == 1 and intento.isalpha():
@@ -767,7 +765,7 @@ def jugar_de_nuevo():
         respuesta = input("¿Le gustaría jugar de nuevo? (si/no): ")
         respuesta = respuesta.lower()
         
-        if respuesta == "si":
+        if respuesta == "si" or respuesta == "sí":
             return True
         elif respuesta == "no":
             return False
@@ -1008,7 +1006,9 @@ def jugar_ahorcado():
     if jugar_de_nuevo():
         jugar_ahorcado()
 
-jugar_ahorcado()
+if __name__ == "__main__": ##Función principal.
+    instrucciones()
+    jugar_ahorcado()
 ```
 
   
